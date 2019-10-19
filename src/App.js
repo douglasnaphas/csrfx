@@ -4,8 +4,12 @@ import MyComponent from "./components/MyComponent";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 function App() {
+  const [url, setUrl] = React.useState(
+    "https://jsonplaceholder.typicode.com/posts/1"
+  );
   return (
     <div className="App">
       <Typography variant="h2" component="h1">
@@ -21,7 +25,15 @@ function App() {
           Enter a URL
         </Typography>
         <br />
-        <TextField label="URL:"></TextField>
+        <TextField
+          label="URL:"
+          value={url}
+          style={{ width: "auto" }}
+        ></TextField>
+        <br />
+        <Button variant="contained" onClick={() => {}}>
+          Execute
+        </Button>
       </Paper>
     </div>
   );
