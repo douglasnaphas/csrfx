@@ -1,5 +1,28 @@
 .App {
   text-align: center;
+  background-color: #c40808;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.Page-title {
+  text-align: center;
+  background-color: #c40808;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.White-paper {
+  background-color: white;
+  color: black;
+  padding: 20px;
 }
 
 .App-logo {
@@ -7,7 +30,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #c40808;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
