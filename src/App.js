@@ -1,15 +1,13 @@
 import React from "react";
 import "./App.css";
-import MyComponent from "./components/MyComponent";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 function App() {
-  const [url, setUrl] = React.useState(
-    "https://jsonplaceholder.typicode.com/posts/1"
-  );
+  const [url, setUrl] = React.useState("initial url");
+  const [counter, setCounter] = React.useState(0);
   return (
     <div className="App">
       <Typography variant="h2" component="h1">
@@ -20,18 +18,28 @@ function App() {
       </Typography>
       <br />
       <br />
-      <Paper className="White-paper">
+      <Paper className="White-paper" style={{ minWidth: "400px" }}>
         <Typography variant="h5" component="h3">
           Enter a URL
         </Typography>
         <br />
         <TextField
           label="URL:"
-          value={url}
-          style={{ width: "auto" }}
+          fullWidth
+          onChange={event => {
+            setUrl(event.target.value);
+          }}
         ></TextField>
         <br />
-        <Button variant="contained" onClick={() => {}}>
+        <Button
+          variant="contained"
+          onClick={() => {
+            console.log(url);
+            fetch(url).then(r => {
+              console.log(r.status);
+            });
+          }}
+        >
           Execute
         </Button>
       </Paper>
