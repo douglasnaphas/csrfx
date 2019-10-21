@@ -22,26 +22,31 @@ function App() {
         <Typography variant="h5" component="h3">
           Enter a URL
         </Typography>
+        <div>
+          <br />
+          <TextField
+            label="URL:"
+            fullWidth
+            onChange={event => {
+              setUrl(event.target.value);
+            }}
+          ></TextField>
+        </div>
         <br />
-        <TextField
-          label="URL:"
-          fullWidth
-          onChange={event => {
-            setUrl(event.target.value);
-          }}
-        ></TextField>
         <br />
-        <Button
-          variant="contained"
-          onClick={() => {
-            console.log(url);
-            fetch(url).then(r => {
-              console.log(r.status);
-            });
-          }}
-        >
-          Execute
-        </Button>
+        <div>
+          <Button
+            variant="contained"
+            onClick={() => {
+              console.log(url);
+              fetch(url).then(r => {
+                console.log(r.status);
+              });
+            }}
+          >
+            Execute
+          </Button>
+        </div>
       </Paper>
     </div>
   );
