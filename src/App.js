@@ -1,13 +1,14 @@
-import React from "react";
-import "./App.css";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import React from 'react';
+import './App.css';
+import Paper from '@material-ui/core/Paper';
+import Switch from '@material-ui/core/Switch';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 function App() {
-  const [url, setUrl] = React.useState("initial url");
-  const [counter, setCounter] = React.useState(0);
+  const [url, setUrl] = React.useState('initial url');
+  const [method, setMethod] = React.useState('GET');
   return (
     <div className="App">
       <Typography variant="h2" component="h1">
@@ -18,7 +19,21 @@ function App() {
       </Typography>
       <br />
       <br />
-      <Paper className="White-paper" style={{ minWidth: "400px" }}>
+      <Paper className="White-paper" style={{ minWidth: '400px' }}>
+        <div>
+          GET{' '}
+          <Switch
+            checked={method !== 'GET'}
+            onChange={event => {
+              if (event.target.checked) {
+                setMethod('POST');
+              } else {
+                setMethod('GET');
+              }
+            }}
+          ></Switch>{' '}
+          POST
+        </div>
         <Typography variant="h5" component="h3">
           Enter a URL
         </Typography>
