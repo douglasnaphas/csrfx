@@ -7,8 +7,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 function App() {
-  const [url, setUrl] = React.useState('initial url');
+  const [url, setUrl] = React.useState('');
   const [method, setMethod] = React.useState('GET');
+  const [postBody, setPostBody] = React.useState('');
   return (
     <div className="App">
       <Typography variant="h2" component="h1">
@@ -40,7 +41,7 @@ function App() {
         <div>
           <br />
           <TextField
-            label="URL:"
+            label="URL"
             fullWidth
             onChange={event => {
               setUrl(event.target.value);
@@ -49,12 +50,37 @@ function App() {
         </div>
         <br />
         <br />
+        {method === 'POST' && (
+          <div>
+            <Typography variant="h5" component="h3">
+              Enter a POST body
+            </Typography>
+            <TextField
+              label="POST body"
+              multiline
+              fullWidth
+              value={postBody}
+              onChange={event => {
+                setPostBody(event.target.value);
+              }}
+            ></TextField>
+          </div>
+        )}
+        <br />
         <div>
           <Button
             variant="contained"
             onClick={() => {
-              console.log(url);
-              fetch(url).then(r => {
+              const init = {
+                method,
+                credentials: 'include'
+                // Content-Type: "application/JSON" triggers a preflight
+                // headers: { 'Content-Type': 'application/JSON' }
+              };
+              if (method === 'POST') {
+                init.body = postBody;
+              }
+              fetch(url, init).then(r => {
                 console.log(r.status);
               });
             }}
