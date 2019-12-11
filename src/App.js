@@ -27,21 +27,24 @@ function App() {
   });
   return (
     <MuiThemeProvider theme={theme}>
+      <AppBar
+        style={{ textAlign: "right", marginTop: "0px" }}
+        position="static"
+      >
+        <IconButton
+          href="https://github.com/douglasnaphas/csrfx"
+          style={{
+            width: "30px",
+            marginRight: "-10px"
+          }}
+        >
+          <GitHubIcon
+            fontSize="large"
+            style={{ padding: "10px", color: "white", marginRight: "-10px" }}
+          ></GitHubIcon>
+        </IconButton>
+      </AppBar>
       <div className="App">
-        <AppBar style={{ textAlign: "right" }}>
-          <IconButton
-            href="https://github.com/douglasnaphas/csrfx"
-            style={{
-              width: "30px",
-              marginRight: "-10px"
-            }}
-          >
-            <GitHubIcon
-              fontSize="large"
-              style={{ padding: "10px", color: "white", marginRight: "-10px" }}
-            ></GitHubIcon>
-          </IconButton>
-        </AppBar>
         <Typography variant="h2" component="h1">
           CSRFX
         </Typography>
