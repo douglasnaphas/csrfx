@@ -22,7 +22,7 @@ function App() {
       <Typography variant="h2" component="h1">
         CSRFX
       </Typography>
-      <Typography variant="h3" component="h3">
+      <Typography variant="h3" component="h3" style={{ padding: "8px" }}>
         Attempt Cross-Site Request Forgeries to test defenses
       </Typography>
       <br />
