@@ -9,6 +9,8 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
+import TableHead from "@material-ui/core/TableHead";
+import { Tab } from "@material-ui/core";
 
 function App() {
   const [url, setUrl] = React.useState("");
@@ -76,36 +78,85 @@ function App() {
           <Button
             variant="contained"
             onClick={() => {
-              const init = {
-                method,
-                credentials: "include"
-                // Content-Type: "application/JSON" triggers a preflight
-                // TODO: send with/without Content-Type: "application/JSON"
-                // headers: { 'Content-Type': 'application/JSON' }
-              };
-              if (method === "POST") {
-                init.body = postBody;
-              }
-              fetch(url, init).then(r => {
-                console.log(r.status);
-                setResults(results =>
-                  results.concat([{ method, preflight: "" }])
-                );
+              [
+                {
+                  description: "no-preflight",
+                  contentType: "text/plain;charset=UTF-8"
+                },
+                {
+                  description: "preflight-app/JSON",
+                  contentType: "application/JSON"
+                }
+              ].forEach(trial => {
+                const init = {
+                  method,
+                  credentials: "include"
+                  // Content-Type: "application/JSON" triggers a preflight
+                  // TODO: send with/without Content-Type: "application/JSON"
+                  // headers: { 'Content-Type': 'application/JSON' }
+                };
+                if (method === "POST") {
+                  init.body = postBody;
+                }
+                fetch(url, init)
+                  .then(r => {
+                    console.log(r.status);
+                    setResults(results =>
+                      results.concat([
+                        {
+                          description: trial.description,
+                          contentType: trial.contentType,
+                          status: r.status
+                        }
+                      ])
+                    );
+                  })
+                  .catch(e => {
+                    setResults(results =>
+                      results.concat([
+                        {
+                          description: trial.description,
+                          contentType: trial.contentType,
+                          status: "error"
+                        }
+                      ])
+                    );
+                  });
               });
+
+              // non-preflighted content type
+
+              // preflighted content type
+
+              //
             }}
           >
             Execute
           </Button>
         </div>
       </Paper>
-      {results && Array.isArray(results) && results.length && (
+      {results && Array.isArray(results) && results.length > 0 && (
         <>
           <br />
           <Paper className="White-paper" style={{ minWidth: "400px" }}>
+            <Typography variant="h5" component="h3">
+              Results
+            </Typography>
             <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Description</TableCell>
+                  <TableCell>Content Type</TableCell>
+                  <TableCell>Status</TableCell>
+                </TableRow>
+              </TableHead>
               <TableBody>
                 {results.map((result, index) => (
-                  <TableRow key={`${index}-${result.description}`}></TableRow>
+                  <TableRow key={`${index}-${result.description}`}>
+                    <TableCell>{result.description}</TableCell>
+                    <TableCell>{result.contentType}</TableCell>
+                    <TableCell>{result.status}</TableCell>
+                  </TableRow>
                 ))}
               </TableBody>
             </Table>
