@@ -1,15 +1,20 @@
-import React from 'react';
-import './App.css';
-import Paper from '@material-ui/core/Paper';
-import Switch from '@material-ui/core/Switch';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import React from "react";
+import "./App.css";
+import Paper from "@material-ui/core/Paper";
+import Switch from "@material-ui/core/Switch";
+import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableRow from "@material-ui/core/TableRow";
 
 function App() {
-  const [url, setUrl] = React.useState('');
-  const [method, setMethod] = React.useState('GET');
-  const [postBody, setPostBody] = React.useState('');
+  const [url, setUrl] = React.useState("");
+  const [method, setMethod] = React.useState("GET");
+  const [postBody, setPostBody] = React.useState("");
+  const [results, setResults] = React.useState([]);
   return (
     <div className="App">
       <Typography variant="h2" component="h1">
@@ -20,19 +25,19 @@ function App() {
       </Typography>
       <br />
       <br />
-      <Paper className="White-paper" style={{ minWidth: '400px' }}>
+      <Paper className="White-paper" style={{ minWidth: "400px" }}>
         <div>
-          GET{' '}
+          GET{" "}
           <Switch
-            checked={method !== 'GET'}
+            checked={method !== "GET"}
             onChange={event => {
               if (event.target.checked) {
-                setMethod('POST');
+                setMethod("POST");
               } else {
-                setMethod('GET');
+                setMethod("GET");
               }
             }}
-          ></Switch>{' '}
+          ></Switch>{" "}
           POST
         </div>
         <Typography variant="h5" component="h3">
@@ -50,7 +55,7 @@ function App() {
         </div>
         <br />
         <br />
-        {method === 'POST' && (
+        {method === "POST" && (
           <div>
             <Typography variant="h5" component="h3">
               Enter a POST body
@@ -73,15 +78,19 @@ function App() {
             onClick={() => {
               const init = {
                 method,
-                credentials: 'include'
+                credentials: "include"
                 // Content-Type: "application/JSON" triggers a preflight
+                // TODO: send with/without Content-Type: "application/JSON"
                 // headers: { 'Content-Type': 'application/JSON' }
               };
-              if (method === 'POST') {
+              if (method === "POST") {
                 init.body = postBody;
               }
               fetch(url, init).then(r => {
                 console.log(r.status);
+                setResults(results =>
+                  results.concat([{ method, preflight: "" }])
+                );
               });
             }}
           >
@@ -89,6 +98,20 @@ function App() {
           </Button>
         </div>
       </Paper>
+      {results && Array.isArray(results) && results.length && (
+        <>
+          <br />
+          <Paper className="White-paper" style={{ minWidth: "400px" }}>
+            <Table>
+              <TableBody>
+                {results.map((result, index) => (
+                  <TableRow key={`${index}-${result.description}`}></TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Paper>
+        </>
+      )}
     </div>
   );
 }
