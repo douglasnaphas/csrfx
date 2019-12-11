@@ -10,7 +10,6 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import TableHead from "@material-ui/core/TableHead";
-import { Tab } from "@material-ui/core";
 
 function App() {
   const [url, setUrl] = React.useState("");
@@ -91,10 +90,8 @@ function App() {
               ].forEach(trial => {
                 const init = {
                   method,
-                  credentials: "include"
-                  // Content-Type: "application/JSON" triggers a preflight
-                  // TODO: send with/without Content-Type: "application/JSON"
-                  // headers: { 'Content-Type': 'application/JSON' }
+                  credentials: "include",
+                  headers: { "Content-Type": trial.contentType }
                 };
                 if (method === "POST") {
                   init.body = postBody;
