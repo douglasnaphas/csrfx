@@ -14,6 +14,7 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import AppBar from "@material-ui/core/AppBar";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import Link from "@material-ui/core/Link";
+import IconButton from "@material-ui/core/IconButton";
 
 function App() {
   const [url, setUrl] = React.useState("");
@@ -28,11 +29,20 @@ function App() {
   return (
     <MuiThemeProvider theme={theme}>
       <div className="App">
-        {/* <AppBar>
-          <GitHubIcon fontSize="large" style={{ padding: "10px" }}>
-            <Link href="https://github.com/douglasnaphas/csrfx"></Link>
-          </GitHubIcon>
-        </AppBar> */}
+        <AppBar style={{ textAlign: "right" }}>
+          <IconButton
+            href="https://github.com/douglasnaphas/csrfx"
+            style={{
+              width: "30px",
+              marginRight: "-10px"
+            }}
+          >
+            <GitHubIcon
+              fontSize="large"
+              style={{ padding: "10px", color: "white", marginRight: "-10px" }}
+            ></GitHubIcon>
+          </IconButton>
+        </AppBar>
         <Typography variant="h2" component="h1">
           CSRFX
         </Typography>
