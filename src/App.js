@@ -78,6 +78,7 @@ function App() {
           <Button
             variant="contained"
             onClick={() => {
+              setResults([]);
               [
                 {
                   description: "no-preflight",
