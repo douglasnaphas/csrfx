@@ -13,7 +13,6 @@ import TableHead from "@material-ui/core/TableHead";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import AppBar from "@material-ui/core/AppBar";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import Link from "@material-ui/core/Link";
 import IconButton from "@material-ui/core/IconButton";
 
 function App() {
