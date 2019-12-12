@@ -164,7 +164,7 @@ function App() {
                 //
               }}
             >
-              Execute
+              Execute Fetches
             </Button>
           </div>
         </Paper>
@@ -195,6 +195,26 @@ function App() {
               </Table>
             </Paper>
           </>
+        )}
+        {url && (
+          <div id="form-container">
+            <br />
+            <br />
+            <Typography variant="h5" component="h3">
+              Form
+            </Typography>
+            <form action={url} method={method}>
+              <div>
+                <label for='{"query"'>{'(GraphQL) {"query":'}</label>
+                <input name='{"query"' id='{"query"'></input>
+              </div>
+              <div>
+                <input type="submit" value="submit form to URL"></input>
+              </div>
+            </form>
+            <br />
+            <br />
+          </div>
         )}
       </div>
     </MuiThemeProvider>
