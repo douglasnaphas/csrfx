@@ -107,12 +107,20 @@ function App() {
                 setResults([]);
                 [
                   {
-                    description: "no-preflight",
+                    description: "no-preflight-text/plain",
                     contentType: "text/plain;charset=UTF-8"
                   },
                   {
                     description: "preflight-app/JSON",
                     contentType: "application/JSON"
+                  },
+                  {
+                    description: "no-preflight-form-urlencoded",
+                    contentType: "application/x-www-form-urlencoded"
+                  },
+                  {
+                    description: "no-preflight-multipart",
+                    contentType: "multipart/form-data"
                   }
                 ].forEach(trial => {
                   const init = {
