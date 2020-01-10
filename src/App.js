@@ -175,7 +175,7 @@ function App() {
               <Typography variant="h5" component="h3">
                 Results
               </Typography>
-              <Table>
+              <Table id="results-table">
                 <TableHead>
                   <TableRow>
                     <TableCell>Description</TableCell>
