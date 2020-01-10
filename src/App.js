@@ -171,7 +171,11 @@ function App() {
         {results && Array.isArray(results) && results.length > 0 && (
           <>
             <br />
-            <Paper className="White-paper" style={{ minWidth: "400px" }}>
+            <Paper
+              id="results-paper"
+              className="White-paper"
+              style={{ minWidth: "400px" }}
+            >
               <Typography variant="h5" component="h3">
                 Results
               </Typography>
